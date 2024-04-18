@@ -8,7 +8,7 @@ public class Weapon : GameUnit
 
     [SerializeField] private GameObject child;
     [SerializeField] private BulletType bulletType;
-
+    public IBooster weaponBooster;
     public bool IsCanAttack => child.activeSelf;
 
     public void SetActive(bool active)

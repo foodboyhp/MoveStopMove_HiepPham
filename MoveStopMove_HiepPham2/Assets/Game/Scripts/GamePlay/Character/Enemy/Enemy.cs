@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Enemy : Character
 {
     [SerializeField] private NavMeshAgent agent;
+    // public float Speed => agent.speed;
     private IState<Enemy> currentState;
     private Vector3 destination;
     private CounterTime counter = new CounterTime();

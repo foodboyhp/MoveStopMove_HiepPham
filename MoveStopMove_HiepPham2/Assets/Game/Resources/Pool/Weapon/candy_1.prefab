@@ -48,6 +48,7 @@ MonoBehaviour:
   poolType: 5
   child: {fileID: 6373832990764767362}
   bulletType: 14
+  weaponBooster: {fileID: 11400000, guid: 79e502f4abc08754fad87f1b484d0541, type: 2}
 --- !u!1 &6373832990764767362
 GameObject:
   m_ObjectHideFlags: 0

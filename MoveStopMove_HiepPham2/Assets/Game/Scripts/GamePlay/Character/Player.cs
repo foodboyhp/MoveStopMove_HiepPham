@@ -7,9 +7,12 @@ public class Player : Character
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float moveSpeed = 5f;
+    // [SerializeField] private
+    // public float Speed => moveSpeed;
     private CounterTime counter = new CounterTime();
     private bool isMoving = false;
     private bool IsCanUpdate => GameManager.Ins.IsState(GameState.GamePlay) || GameManager.Ins.IsState(GameState.Setting);
+    // private BoosterType weaponBoosterType;
     private SkinType skinType = SkinType.SKIN_Normal;
     private WeaponType weaponType = WeaponType.W_Candy_1;
     private HatType hatType = HatType.HAT_Cap;
@@ -53,6 +56,8 @@ public class Player : Character
     public override void OnInit()
     {
         OnTakeClothsData();
+        // OnTakeBoosterData();
+
         base.OnInit();
         TF.rotation = Quaternion.Euler(Vector3.up * 180);
         SetSize(MIN_SIZE);
@@ -167,5 +172,32 @@ public class Player : Character
         hatType = UserData.Ins.playerHat;
         accessoryType = UserData.Ins.playerAccessory;
         pantType = UserData.Ins.playerPant;
+    }
+
+    // internal void OnTakeBoosterData(){
+    //     weaponBoosterType = UserData.Ins.weaponBooster;
+
+    // }
+    public override void ChangeWeapon(WeaponType weaponType){
+        if(currentSkin.currentWeapon != null){
+            currentSkin.currentWeapon.weaponBooster.Unapply(this);
+        }
+        base.ChangeWeapon(weaponType);
+        currentSkin.currentWeapon.weaponBooster.Apply(this);
+    }
+    //Speed buff
+    public void ScaleSpeed(float scaleAmount){
+        this.moveSpeed *= scaleAmount;
+    }
+    public void ResetSpeed(){
+        this.moveSpeed = 5f;
+    }
+
+    //Attack Speed Buff
+    public void ScaleAttackSpeed(float scaleAmount){
+
+    }
+    public void ResetAttackSpeed(){
+        
     }
 }

@@ -174,7 +174,7 @@ public class Character : GameUnit, IHit
 
     [SerializeField] protected Skin currentSkin;
 
-    public void ChangeWeapon(WeaponType weaponType)
+    public virtual void ChangeWeapon(WeaponType weaponType)
     {
         currentSkin.ChangeWeapon(weaponType);
     }

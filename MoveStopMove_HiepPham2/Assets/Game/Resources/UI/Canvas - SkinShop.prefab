@@ -33,6 +33,7 @@ RectTransform:
   - {fileID: 2791147058645164730}
   - {fileID: 2791147059026575600}
   - {fileID: 6642422570283569046}
+  - {fileID: 2922487675738870790}
   m_Father: {fileID: 1146810405598766539}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -112,7 +113,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1146810404143671698}
-  - {fileID: 2922487675738870790}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -207,6 +207,8 @@ MonoBehaviour:
   buttonState: {fileID: 5438741051616840366}
   coinText: {fileID: 2589540924349640844}
   adsText: {fileID: 6642422568706523097}
+  prevItem: {fileID: 0}
+  currentItem: {fileID: 0}
 --- !u!1 &2791147058314841256
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,8 +2234,8 @@ RectTransform:
   m_Children:
   - {fileID: 3549791546043242774}
   - {fileID: 7857408848131301595}
-  m_Father: {fileID: 1146810405598766539}
-  m_RootOrder: 1
+  m_Father: {fileID: 1146810404143671698}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2477,7 +2479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8832268415470594490, guid: 52614d0bc48eb9f4fa1aed01bca44b49, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -632
+      value: -731
       objectReference: {fileID: 0}
     - target: {fileID: 8832268415470594490, guid: 52614d0bc48eb9f4fa1aed01bca44b49, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

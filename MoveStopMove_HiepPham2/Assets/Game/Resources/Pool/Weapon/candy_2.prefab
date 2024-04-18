@@ -133,3 +133,4 @@ MonoBehaviour:
   poolType: 6
   child: {fileID: 963260375387708961}
   bulletType: 15
+  weaponBooster: {fileID: 11400000, guid: 79e502f4abc08754fad87f1b484d0541, type: 2}

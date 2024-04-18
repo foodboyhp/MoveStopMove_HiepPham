@@ -32,6 +32,8 @@ public class UserData : ScriptableObject
     } 
     public const string Key_Level = "Level";
     public const string Key_Coin = "Coin";
+    // public const string Key_Skin_Booster = "SkinBooster";
+    // public const string Key_Weapon_Booster = "WeaponBooster";
     public const string Key_Player_Weapon = "PlayerWeapon";
     public const string Key_Player_Hat = "PlayerHat";
     public const string Key_Player_Pant = "PlayerPant";
@@ -46,6 +48,8 @@ public class UserData : ScriptableObject
 
     public int level = 0;
     public int coin = 0;
+    // public BoosterType skinBooster;
+    // public BoosterType weaponBooster;
     public WeaponType playerWeapon;
     public HatType playerHat;
     public PantType playerPant;
@@ -114,6 +118,8 @@ public class UserData : ScriptableObject
     {
         level = PlayerPrefs.GetInt(Key_Level, 0);
         coin = PlayerPrefs.GetInt(Key_Coin, 0);
+
+        // weaponBooster = GetEnumData(Key_Weapon_Booster, BoosterType.Attack_Speed_20 );
 
         playerWeapon = GetEnumData(Key_Player_Weapon, WeaponType.W_Hammer_1);
         playerHat = GetEnumData(Key_Player_Hat, HatType.HAT_Arrow);

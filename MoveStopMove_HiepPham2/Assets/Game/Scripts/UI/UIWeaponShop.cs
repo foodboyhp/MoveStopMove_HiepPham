@@ -8,12 +8,13 @@ using UnityEngine.UI;
 public class UIWeaponShop : UICanvas
 {
     public Transform weaponPoint;
-    [SerializeField] WeaponData weaponData;
-    [SerializeField] ButtonState buttonState;
-    [SerializeField] TextMeshProUGUI nameTxt;
-    [SerializeField] TextMeshProUGUI playerCoinTxt;
-    [SerializeField] Text coinTxt;
-    [SerializeField] Text adsTxt;
+    [SerializeField] private WeaponData weaponData;
+    [SerializeField] private ButtonState buttonState;
+    [SerializeField] private TextMeshProUGUI nameTxt;
+    [SerializeField] private TextMeshProUGUI playerCoinTxt;
+    [SerializeField] private TextMeshProUGUI descriptionTxt;
+    [SerializeField] private Text coinTxt;
+    [SerializeField] private Text adsTxt;
     private Weapon currentWeapon;
     private WeaponType weaponType;
 
@@ -95,6 +96,7 @@ public class UIWeaponShop : UICanvas
 
         WeaponItem item = weaponData.GetWeaponItem(weaponType);
         nameTxt.SetText(item.name);
+        descriptionTxt.SetText(currentWeapon.weaponBooster.boostDecription);
         coinTxt.text = item.cost.ToString();
         adsTxt.text = item.ads.ToString();
     }

@@ -15,7 +15,7 @@ public class Skin : GameUnit
 
     [SerializeField] bool isCanChange = false;
 
-    Weapon currentWeapon;
+    public Weapon currentWeapon;
     Accessory currentAccessory;
     Hat currentHat;
 
