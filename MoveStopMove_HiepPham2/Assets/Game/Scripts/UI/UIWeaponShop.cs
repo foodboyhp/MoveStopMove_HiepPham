@@ -78,6 +78,7 @@ public class UIWeaponShop : UICanvas
         UserData.Ins.SetEnumData(UserData.Key_Player_Weapon, ref UserData.Ins.playerWeapon, weaponType);
         ChangeWeapon(weaponType);
         LevelManager.Ins.player.TryCloth( UISkinShop.ShopType.Weapon, weaponType);
+        LevelManager.Ins.player.ApplyBoosters();
     }
 
     public void ChangeWeapon(WeaponType weaponType)

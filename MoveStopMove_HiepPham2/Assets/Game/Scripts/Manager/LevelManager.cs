@@ -8,9 +8,11 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] public Player player;
     [SerializeField] private Level currentLevel;
     private List<Enemy> enemys = new List<Enemy>();
+    private List<Booster> boosters = new List<Booster>();
 
     private bool isRevive;
     private int levelIndex;
+    private int totalBooster;
     private int totalEnemy;
     public int TotalCharacter => totalEnemy + enemys.Count;
 
@@ -43,6 +45,10 @@ public class LevelManager : Singleton<LevelManager>
         for (int i = 0; i < enemys.Count; i++)
         {
             enemys[i].OnDespawn();
+        }
+        for(int i = 0; i < boosters.Count; i++)
+        {
+
         }
 
         enemys.Clear();
@@ -103,6 +109,10 @@ public class LevelManager : Singleton<LevelManager>
         enemys.Add(enemy);
 
         enemy.SetScore(player.Score > 0 ? Random.Range(player.Score - 5, player.Score + 5) : 1);
+    }
+
+    private void NewBooster(){
+
     }
 
     public void CharacterDeath(Character c)

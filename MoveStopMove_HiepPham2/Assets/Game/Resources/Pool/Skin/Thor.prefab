@@ -52,7 +52,10 @@ MonoBehaviour:
   leftHand: {fileID: 2833870913666248864}
   pant: {fileID: 7727146095103859851}
   isCanChange: 0
+  currentWeapon: {fileID: 0}
+  currentAccessory: {fileID: 0}
   anim: {fileID: 4065372575201216866}
+  skinBooster: {fileID: 11400000, guid: aaf09120cdc915e4e8f87e962dec5c83, type: 2}
 --- !u!1001 &1412914077629080727
 PrefabInstance:
   m_ObjectHideFlags: 0

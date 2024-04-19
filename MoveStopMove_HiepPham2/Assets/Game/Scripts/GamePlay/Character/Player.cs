@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : Character
 {
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float BASE_MOVEMENT = 5f;
+
     // [SerializeField] private
-    // public float Speed => moveSpeed;
+    // public float Speed => BASE_MOVEMENT;
     private CounterTime counter = new CounterTime();
     private bool isMoving = false;
     private bool IsCanUpdate => GameManager.Ins.IsState(GameState.GamePlay) || GameManager.Ins.IsState(GameState.Setting);
@@ -19,6 +21,18 @@ public class Player : Character
     private AccessoryType accessoryType = AccessoryType.ACC_Headphone;
     private PantType pantType = PantType.Pant_1;
 
+    //Booster scale
+    List<IBooster> boosters;
+    private const float BASE_SPEED = 1.0f;
+    private const float BASE_RANGE = 1.0f;
+    private const float BASE_ATTACK = 1.0f;
+    private const int BASE_SHIELD = 0;
+    [SerializeField] private float speedScale = 1.0f;
+    [SerializeField] private float rangeScale = 1.0f;
+    [SerializeField] private float attackScale = 1.0f;
+    [SerializeField] private int shield = 0;
+
+    //Instant Booster or booster in gameplay
 
     void Update()
     {
@@ -32,7 +46,7 @@ public class Player : Character
 
             if (Input.GetMouseButton(0) && JoystickControl.direct != Vector3.zero)
             {
-                rb.MovePosition(rb.position + JoystickControl.direct * moveSpeed * Time.deltaTime);
+                rb.MovePosition(rb.position + JoystickControl.direct * BASE_MOVEMENT * speedScale * Time.deltaTime);
                 TF.position = rb.position;
                 TF.forward = JoystickControl.direct;
                 ChangeAnim(Constant.ANIM_RUN);
@@ -56,9 +70,8 @@ public class Player : Character
     public override void OnInit()
     {
         OnTakeClothsData();
-        // OnTakeBoosterData();
-
         base.OnInit();
+        ApplyBoosters();
         TF.rotation = Quaternion.Euler(Vector3.up * 180);
         SetSize(MIN_SIZE);
         indicator.SetName("Player");
@@ -106,14 +119,14 @@ public class Player : Character
         base.OnAttack();
         if (target != null && currentSkin.Weapon.IsCanAttack)
         {
-            counter.Start(Throw, TIME_DELAY_THROW);
+            counter.Start(Throw, TIME_DELAY_THROW * this.attackScale);
             ResetAnim();
         }
     }
 
     protected override void SetSize(float size)
     {
-        base.SetSize(size);
+        base.SetSize(size * rangeScale);
         CameraFollow.Ins.SetRateOffset((this.size - MIN_SIZE) / (MAX_SIZE - MIN_SIZE));
     }
 
@@ -122,6 +135,15 @@ public class Player : Character
         ChangeAnim(Constant.ANIM_IDLE);
         IsDead = false;
         ClearTarget();
+    }
+
+    public override void OnHit(UnityAction hitAction){
+        if(shield > 0) {
+            shield --;
+            Debug.Log("Shield is used");
+        } else if (shield <= 0) {
+            base.OnHit(hitAction);
+        }
     }
 
     public override void OnDeath()
@@ -174,30 +196,69 @@ public class Player : Character
         pantType = UserData.Ins.playerPant;
     }
 
-    // internal void OnTakeBoosterData(){
-    //     weaponBoosterType = UserData.Ins.weaponBooster;
+    //Speed boost
+    public void BoostSpeed(float scaleAmount){
+        this.speedScale += scaleAmount;
+    }
 
-    // }
-    public override void ChangeWeapon(WeaponType weaponType){
-        if(currentSkin.currentWeapon != null){
-            currentSkin.currentWeapon.weaponBooster.Unapply(this);
+    //Attack Speed boost
+    public void BoostAttack(float scaleAmount){
+        this.attackScale += scaleAmount;
+    }
+
+    //Range boost
+    public void BoostRange(float scaleAmount){
+        this.rangeScale += scaleAmount;
+    }
+
+    //Shield boost
+    public void BoostShield(int shield){
+        this.shield += shield;
+    }
+
+    public void ApplyBoosters(){
+        boosters = new List<IBooster>();
+        boosters.Add(currentSkin.skinBooster);
+        boosters.Add(currentSkin.currentWeapon.weaponBooster);
+        if(currentSkin.currentAccessory != null){
+            boosters.Add(currentSkin.currentAccessory.accessoryBooster);
+            Debug.Log("Accessory not null");
+        } else {
+            Debug.Log("Accessory is null");
         }
-        base.ChangeWeapon(weaponType);
-        currentSkin.currentWeapon.weaponBooster.Apply(this);
-    }
-    //Speed buff
-    public void ScaleSpeed(float scaleAmount){
-        this.moveSpeed *= scaleAmount;
-    }
-    public void ResetSpeed(){
-        this.moveSpeed = 5f;
+        ApplyBoosterList(boosters);
     }
 
-    //Attack Speed Buff
-    public void ScaleAttackSpeed(float scaleAmount){
+    public void ApplyBoosterList(List<IBooster> boosters) {
+        ResetBooster();
+        foreach(IBooster booster in boosters){
+            switch(booster.boosterType){
+                case BoosterType.BOOST_Attack:
+                    BoostAttack(booster.BoostAmount);
+                    break;
+                case BoosterType.BOOST_Range:
+                    BoostRange(booster.BoostAmount);
+                    break;
+                case BoosterType.BOOST_Speed:
+                    BoostSpeed(booster.BoostAmount);
+                    break;
+                case BoosterType.BOOST_Shield:
+                    BoostShield((int)booster.BoostAmount);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void ResetBooster(){
+        this.speedScale = BASE_SPEED;
+        this.attackScale = BASE_ATTACK;
+        this.rangeScale = BASE_RANGE;
+        this.shield = BASE_SHIELD;
+    }
+    public void ApplyInstantBooster(Booster booster){
 
     }
-    public void ResetAttackSpeed(){
-        
-    }
+
 }

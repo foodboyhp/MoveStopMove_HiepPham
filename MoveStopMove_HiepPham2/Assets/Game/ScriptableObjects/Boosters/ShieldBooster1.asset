@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c2287c6ea786ad48b02e956680f86ea, type: 3}
-  m_Name: AttackSpeedBooster20
+  m_Script: {fileID: 11500000, guid: a19a5b0b9467e29488ae7b8756ef69bd, type: 3}
+  m_Name: ShieldBooster1
   m_EditorClassIdentifier: 
-  boosterType: 1
-  boostDecription: attackspeed + 20%
-  boostAmount: 0.2
+  boosterType: 3
+  boostDecription: shield + 1
+  boostAmount: 1

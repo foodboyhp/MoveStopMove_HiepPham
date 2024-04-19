@@ -85,7 +85,7 @@ public class Character : GameUnit, IHit
         SimplePool.Despawn(indicator);
     }
 
-    public void OnHit(UnityAction hitAction)
+    public virtual void OnHit(UnityAction hitAction)
     {
         if (!IsDead)
         {
@@ -179,7 +179,7 @@ public class Character : GameUnit, IHit
         currentSkin.ChangeWeapon(weaponType);
     }
 
-    public void ChangeSkin(SkinType skinType)
+    public virtual void ChangeSkin(SkinType skinType)
     {
         currentSkin = SimplePool.Spawn<Skin>((PoolType)skinType, TF);
     }

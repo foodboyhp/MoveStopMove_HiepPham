@@ -69,16 +69,16 @@ public class UISkinShop : UICanvas
         switch (currentBar.Type)
         {
             case ShopType.Hat:
-                InitShipItems(data.hats.Ts, ref itemEquiped);
+                InitShopItems(data.hats.Ts, ref itemEquiped);
                 break;
             case ShopType.Pant:
-                InitShipItems(data.pants.Ts, ref itemEquiped);
+                InitShopItems(data.pants.Ts, ref itemEquiped);
                 break;
             case ShopType.Accessory:
-                InitShipItems(data.accessories.Ts, ref itemEquiped);
+                InitShopItems(data.accessories.Ts, ref itemEquiped);
                 break;
             case ShopType.Skin:
-                InitShipItems(data.skins.Ts, ref itemEquiped);
+                InitShopItems(data.skins.Ts, ref itemEquiped);
                 break;
             default:
                 break;
@@ -86,7 +86,7 @@ public class UISkinShop : UICanvas
 
     }
 
-    private void InitShipItems<T>(List<ShopItemData<T>> items, ref ShopItem itemEquiped)  where T : Enum
+    private void InitShopItems<T>(List<ShopItemData<T>> items, ref ShopItem itemEquiped)  where T : Enum
     {
         for (int i = 0; i < items.Count; i++)
         {
@@ -184,6 +184,7 @@ public class UISkinShop : UICanvas
                 case ShopType.Skin:
                     UserData.Ins.SetEnumData(UserData.Ins.playerSkin.ToString(), ShopItem.State.Bought);
                     UserData.Ins.SetEnumData(UserData.Key_Player_Skin, ref UserData.Ins.playerSkin, (SkinType)currentItem.Type);
+                    //Set none to accessory, hat, pant
                     break;
                 case ShopType.Weapon:
                     break;
@@ -193,11 +194,16 @@ public class UISkinShop : UICanvas
   
         }
 
+
         if (itemEquiped != null)
         {
             itemEquiped.SetState(ShopItem.State.Bought);
         }
+        LevelManager.Ins.player.TakeOffClothes();
+        LevelManager.Ins.player.OnTakeClothsData();
+        LevelManager.Ins.player.WearClothes();
 
+        LevelManager.Ins.player.ApplyBoosters();
         currentItem.SetState(ShopItem.State.Equipped);
         SelectItem(currentItem);
     }

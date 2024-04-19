@@ -8,6 +8,7 @@ public class Level : MonoBehaviour
     [SerializeField] Transform minPoint,maxPoint;
     public int enemyReal = 10;
     public int enemyTotal = 20;
+    public int boosterTotal = 30;
 
     public Vector3 RandomPoint()
     {

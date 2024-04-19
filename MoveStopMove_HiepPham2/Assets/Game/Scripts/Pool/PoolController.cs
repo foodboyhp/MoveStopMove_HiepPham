@@ -141,6 +141,14 @@ public enum ParticleType
     LevelUp_3,
 }
 
+public enum BoosterType
+{
+    BOOST_NONE = 0,
+    BOOST_Speed = PoolType.BOOST_Speed,
+    BOOST_Attack  = PoolType.BOOST_Attack,
+    BOOST_Range = PoolType.BOOST_Range,
+    BOOST_Shield = PoolType.BOOST_Shield,
+}
 public enum PoolType
 {
     None,
@@ -190,4 +198,9 @@ public enum PoolType
     ACC_Shield,
 
     TargetIndicator,
+
+    BOOST_Speed,
+    BOOST_Attack,
+    BOOST_Range,
+    BOOST_Shield,
 }

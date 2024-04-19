@@ -16,13 +16,14 @@ public class Skin : GameUnit
     [SerializeField] bool isCanChange = false;
 
     public Weapon currentWeapon;
-    Accessory currentAccessory;
+    public Accessory currentAccessory;
     Hat currentHat;
-
     [SerializeField] Animator anim;
     public Animator Anim => anim;
 
     public Weapon Weapon => currentWeapon;
+
+    public IBooster skinBooster;
 
     public void ChangeWeapon(WeaponType weaponType)
     {
@@ -52,9 +53,9 @@ public class Skin : GameUnit
 
     public void OnDespawn()
     {
-        SimplePool.Despawn(currentWeapon);
-        if (currentAccessory) SimplePool.Despawn(currentAccessory);
-        if (currentHat) SimplePool.Despawn(currentHat);
+        DespawnWeapon();
+        DespawnAccessory();
+        DespawnHat();
     }
 
     public void DespawnHat()
@@ -63,11 +64,17 @@ public class Skin : GameUnit
     }
     public void DespawnAccessory()
     {
-        if (currentAccessory) SimplePool.Despawn(currentAccessory);
+        if (currentAccessory) {
+            SimplePool.Despawn(currentAccessory);
+            // currentAccessory = null;
+        }
     }
 
     internal void DespawnWeapon()
     {
-        if (currentWeapon) SimplePool.Despawn(currentWeapon);
+        if (currentWeapon) {
+            SimplePool.Despawn(currentWeapon);
+        }
     }
+
 }

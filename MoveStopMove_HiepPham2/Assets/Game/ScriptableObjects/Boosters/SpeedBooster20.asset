@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da6ecc69c9f40f4eab63bd996486333, type: 3}
   m_Name: SpeedBooster20
   m_EditorClassIdentifier: 
-  boostDecription: ms + 20%
-  boostAmount: 20
+  boosterType: 2
+  boostDecription: movespeed + 20%
+  boostAmount: 0.2

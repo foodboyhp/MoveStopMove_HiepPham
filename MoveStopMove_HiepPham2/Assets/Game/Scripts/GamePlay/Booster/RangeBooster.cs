@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AttackSpeedBooster", menuName = "Boosters/AttackSpeedBooster", order = 0)]
-public class AttackSpeedBooster : IBooster
+[CreateAssetMenu(fileName = "RangeBooster", menuName = "Boosters/RangeBooster", order = 2)]
+
+public class RangeBooster : IBooster
 {
     public override void Apply(Player target){
     }

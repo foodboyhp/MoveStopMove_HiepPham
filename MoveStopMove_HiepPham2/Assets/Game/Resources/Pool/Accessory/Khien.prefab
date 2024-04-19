@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 38
+  accessoryBooster: {fileID: 11400000, guid: d3bc60f875005b34ca709000b3ad5988, type: 2}
 --- !u!1 &2209634698221070675
 GameObject:
   m_ObjectHideFlags: 0
